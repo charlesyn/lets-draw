@@ -1,7 +1,7 @@
 <template>
-<b-container>
-  <b-row>
-    <b-col class="text-center">
+<v-container>
+  <v-layout>
+    <v-flex md10 offset-md1>
       <canvas
         class="canvas"
         ref="canvas"
@@ -10,9 +10,9 @@
         @mouseup="penUp"
         @mouseleave="penUp">
       </canvas>
-    </b-col>
-  </b-row>
-</b-container>
+    </v-flex>
+  </v-layout>
+</v-container>
 </template>
 
 <script>

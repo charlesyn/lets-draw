@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h2 class="text-center">Canvas</h2>
+    <h2 class="text-md-center">Canvas</h2>
     <router-view/>
   </div>
 </template>
