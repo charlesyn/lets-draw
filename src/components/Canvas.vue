@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import io from 'socket.io-client'
 export default {
   name: 'Canvas',
   data () {
@@ -26,7 +27,8 @@ export default {
       prevY: 0,
       currX: 0,
       currY: 0,
-      contact: false
+      contact: false,
+      socket: null
     }
   },
   created () {
@@ -36,6 +38,8 @@ export default {
     this.canvas = this.$refs.canvas
     this.ctx = this.canvas.getContext('2d')
     this.handleResize()
+    this.socket = io('http://localhost:8081')
+    this.socket.on('draw', this.onDrawEvent)
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
@@ -43,17 +47,36 @@ export default {
   methods: {
     penDown (event) {
       this.contact = true
-      this.ctx.moveTo(this.prevX, this.prevY)
     },
     penMove (event) {
-      this.updateCoords(event)
       if (this.contact) {
-        this.ctx.lineTo(this.currX, this.currY)
-        this.ctx.stroke()
+        this.drawLine(this.prevX, this.currX, this.prevY, this.currY, false)
       }
+      this.updateCoords(event)
     },
     penUp (event) {
       this.contact = false
+    },
+    drawLine (x0, x1, y0, y1, emit) {
+      this.ctx.beginPath()
+      this.ctx.moveTo(x0, y0)
+      this.ctx.lineTo(x1, y1)
+      this.ctx.stroke()
+      this.ctx.closePath()
+
+      if (emit) {
+        return
+      }
+
+      var w = this.ctx.canvas.width
+      var h = this.canvas.height
+
+      this.socket.emit('draw', {
+        x0: x0 / w,
+        x1: x1 / w,
+        y0: y0 / h,
+        y1: y1 / h
+      })
     },
     updateCoords (event) {
       var rect = this.canvas.getBoundingClientRect()
@@ -65,6 +88,12 @@ export default {
     handleResize () {
       this.ctx.canvas.width = 2 * window.innerWidth / 3
       this.ctx.canvas.height = 2 * window.innerHeight / 3
+    },
+    onDrawEvent (data) {
+      var w = this.ctx.canvas.width
+      var h = this.ctx.canvas.height
+
+      this.drawLine(data.x0 * w, data.x1 * w, data.y0 * h, data.y1 * h, true)
     }
   }
 
