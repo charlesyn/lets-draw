@@ -15,16 +15,14 @@
 </template>
 
 <script>
-import io from 'socket.io-client'
 export default {
+  props: ['socket'],
   name: 'ServerJoin',
   mounted () {
-    this.socket = io('localhost:8081')
   },
   data () {
     return {
-      room: '',
-      socket: null
+      room: ''
     }
   },
   methods: {

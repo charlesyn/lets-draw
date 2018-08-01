@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import io from 'socket.io-client'
 export default {
+  props: ['socket'],
   name: 'Canvas',
   data () {
     return {
@@ -27,8 +27,7 @@ export default {
       prevY: 0,
       currX: 0,
       currY: 0,
-      contact: false,
-      socket: null
+      contact: false
     }
   },
   created () {
@@ -38,7 +37,6 @@ export default {
     this.canvas = this.$refs.canvas
     this.ctx = this.canvas.getContext('2d')
     this.handleResize()
-    this.socket = io('http://localhost:8081')
     this.socket.on('draw', this.onDrawEvent)
   },
   destroyed () {
@@ -92,7 +90,7 @@ export default {
     onDrawEvent (data) {
       var w = this.ctx.canvas.width
       var h = this.ctx.canvas.height
-
+      console.log('drawing')
       this.drawLine(data.x0 * w, data.x1 * w, data.y0 * h, data.y1 * h, true)
     }
   }
