@@ -1,17 +1,13 @@
 <template>
-  <v-container>
-    <v-layout>
-      <v-flex md4 offset-md4>
-        <v-text-field
-          label='Room'
-          placeholder='Join a Room'
-          v-model='room'
-          @keyup.enter='joinServer'
-          >
-        </v-text-field>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-flex>
+    <v-text-field
+      placeholder='My Room'
+      hint="Enter a room name to join a room"
+      v-model='room'
+      @keyup.enter='joinServer'
+      >
+    </v-text-field>
+  </v-flex>
 </template>
 
 <script>

@@ -1,7 +1,6 @@
 <template>
-<v-container>
   <v-layout>
-    <v-flex md10 offset-md1>
+    <v-flex>
       <canvas
         class="canvas"
         ref="canvas"
@@ -12,7 +11,6 @@
       </canvas>
     </v-flex>
   </v-layout>
-</v-container>
 </template>
 
 <script>
@@ -84,8 +82,8 @@ export default {
       this.currY = event.clientY - rect.top
     },
     handleResize () {
-      this.ctx.canvas.width = 2 * window.innerWidth / 3
-      this.ctx.canvas.height = 2 * window.innerHeight / 3
+      this.ctx.canvas.width = window.innerWidth
+      this.ctx.canvas.height = window.innerHeight
     },
     onDrawEvent (data) {
       var w = this.ctx.canvas.width
@@ -101,7 +99,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .canvas {
-    border-style: solid;
-    border-width: 1px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
   }
 </style>

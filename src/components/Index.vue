@@ -1,19 +1,21 @@
 <template>
   <div>
-    <server-join :socket='socket'/>
-    <canvas-vue :socket='socket'/>
+    <room-sidebar :socket='socket'/>
+    <v-layout>
+      <canvas-vue :socket='socket'/>
+    </v-layout>
   </div>
 </template>
 
 <script>
 import io from 'socket.io-client'
 import CanvasVue from './Canvas'
-import ServerJoin from './ServerJoin'
+import RoomSidebar from './RoomSidebar'
 
 export default {
   components: {
-    CanvasVue,
-    ServerJoin
+    RoomSidebar,
+    CanvasVue
   },
   name: 'Index',
   created () {

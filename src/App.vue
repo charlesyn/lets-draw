@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <h2 class="text-md-center">Canvas</h2>
-    <router-view/>
+    <v-app>
+      <router-view/>
+    </v-app>
   </div>
 </template>
 
