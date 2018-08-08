@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['socket'],
+  props: ['socket', 'username'],
   name: 'ServerJoin',
   mounted () {
   },
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     joinServer () {
-      this.socket.emit('room', this.room)
+      this.socket.emit('room', { room: this.room, username: this.username })
     }
   }
 }
