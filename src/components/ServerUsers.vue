@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  props: ['socket'],
+  props: ['socket', 'username'],
   name: 'ServerUser',
   data () {
     return {
@@ -31,9 +31,29 @@ export default {
     }
   },
   mounted () {
+    this.socket.on('pollUsers', this.sendUsername)
+    this.socket.on('removeUser', this.removeUserFromList)
+    this.socket.on('clearUserList', this.clearUserList)
+    this.socket.on('updateUserList', this.updateUserList)
   },
   methods: {
     hover () {
+    },
+    sendUsername (data) {
+      this.socket.emit('getUserList', {
+        username: this.username,
+        recipient: data
+      })
+    },
+    updateUserList (data) {
+      console.log(data)
+      this.Users.push({ name: data })
+    },
+    removeUserFromList (data) {
+      this.Users.splice(this.Users.findIndex(item => item.name === data), 1)
+    },
+    clearUserList () {
+      this.Users = []
     }
   }
 }

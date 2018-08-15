@@ -3,7 +3,7 @@
     <v-toolbar flat>
       <server-join :socket='socket' :username='username'/>
     </v-toolbar>
-    <server-users :socket='socket'/>
+    <server-users :socket='socket' :username='username'/>
     <myUser id='myUser' :username='username' />
   </v-navigation-drawer>
 </template>
