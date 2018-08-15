@@ -1,7 +1,7 @@
 <template>
   <div>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
-    <room-sidebar :socket='socket'/>
+    <set-user v-on:usernameSet='setUsername($event)'/>
+    <room-sidebar :socket='socket' :username='username'/>
     <v-layout>
       <canvas-vue :socket='socket'/>
     </v-layout>
@@ -12,11 +12,13 @@
 import io from 'socket.io-client'
 import CanvasVue from './Canvas'
 import RoomSidebar from './RoomSidebar'
+import SetUser from './SetUser'
 
 export default {
   components: {
     RoomSidebar,
-    CanvasVue
+    CanvasVue,
+    SetUser
   },
   name: 'Index',
   created () {
@@ -26,7 +28,14 @@ export default {
   },
   data () {
     return {
-      socket: null
+      socket: null,
+      username: ''
+    }
+  },
+  methods: {
+    setUsername (data) {
+      this.username = data
+      console.log(data)
     }
   }
 }

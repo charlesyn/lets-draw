@@ -6,10 +6,8 @@
           <v-icon large>account_circle</v-icon>
         </v-list-tile-avatar>
           <v-text-field
-            placeholder='Me'
-            hint='Username'
             v-model='username'
-            @keyup.enter='setUser'
+            disabled
             >
           </v-text-field>
       </v-list-tile>
@@ -19,16 +17,13 @@
 <script>
 
 export default {
+  props: ['username'],
   name: 'MyUser',
   data () {
     return {
-      username: ''
     }
   },
   methods: {
-    setUser () {
-      this.$emit('setUser', this.username)
-    }
   }
 }
 </script>

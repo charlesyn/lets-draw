@@ -3,8 +3,8 @@
     <v-toolbar flat>
       <server-join :socket='socket' :username='username'/>
     </v-toolbar>
-    <server-users/>
-    <myUser id='myUser' v-on:setUser='updateUser($event)' />
+    <server-users :socket='socket'/>
+    <myUser id='myUser' :username='username' />
   </v-navigation-drawer>
 </template>
 <script>
@@ -13,7 +13,7 @@ import ServerUsers from './ServerUsers'
 import MyUser from './MyUser'
 
 export default {
-  props: ['socket'],
+  props: ['socket', 'username'],
   components: {
     ServerJoin,
     ServerUsers,
@@ -22,14 +22,9 @@ export default {
   name: 'RoomSidebar',
   data () {
     return {
-      username: ''
     }
   },
   methods: {
-    updateUser (username) {
-      this.username = username
-      console.log(username)
-    }
   }
 }
 </script>
