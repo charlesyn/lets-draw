@@ -3,8 +3,8 @@
     <v-list>
       <v-list-tile avatar>
         <v-list-tile-avatar>
+          <v-icon large>account_circle</v-icon>
         </v-list-tile-avatar>
-        <v-list-tile-content>
           <v-text-field
             placeholder='Me'
             hint='Username'
@@ -12,7 +12,6 @@
             @keyup.enter='setUser'
             >
           </v-text-field>
-        </v-list-tile-content>
       </v-list-tile>
     </v-list>
   </v-toolbar>

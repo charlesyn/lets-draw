@@ -1,5 +1,6 @@
 <template>
   <div>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
     <room-sidebar :socket='socket'/>
     <v-layout>
       <canvas-vue :socket='socket'/>
