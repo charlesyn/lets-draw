@@ -10,11 +10,19 @@
         @mouseleave="penUp">
       </canvas>
     </v-flex>
+    <v-flex>
+      <draw-tools id='drawTools' :canvas='canvas' :ctx='ctx' :socket='socket'/>
+    </v-flex>
   </v-layout>
 </template>
 
 <script>
+import DrawTools from './DrawTools'
+
 export default {
+  components: {
+    DrawTools
+  },
   props: ['socket'],
   name: 'Canvas',
   data () {
@@ -36,6 +44,7 @@ export default {
     this.ctx = this.canvas.getContext('2d')
     this.handleResize()
     this.socket.on('draw', this.onDrawEvent)
+    this.ctx.lineJoin = this.ctx.lineCap = 'round'
   },
   destroyed () {
     window.removeEventListener('resize', this.handleResize)
@@ -102,5 +111,9 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
+  }
+  #drawTools {
+    position: absolute;
+    bottom: 0;
   }
 </style>

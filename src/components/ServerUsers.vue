@@ -10,7 +10,7 @@
         avatar
         @click='hover'>
         <v-list-tile-avatar>
-          <v-icon>face</v-icon>
+          <v-icon>person</v-icon>
         </v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title v-text='User.name'></v-list-tile-title>
