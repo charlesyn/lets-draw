@@ -1,17 +1,16 @@
 <template>
   <v-toolbar dense floating>
-    <v-btn icon @click='usePencil'>
-      <v-icon>create</v-icon>
-    </v-btn>
-    <v-btn icon @click='useBrush'>
-      <v-icon>brush</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>palette</v-icon>
-    </v-btn>
-    <v-btn icon @click='useEraser'>
-      <v-icon>web_asset</v-icon>
-    </v-btn>
+    <v-btn-toggle v-model='toggle' mandatory>
+      <v-btn icon @click='usePencil'>
+        <v-icon>create</v-icon>
+      </v-btn>
+      <v-btn icon @click='useBrush'>
+        <v-icon>brush</v-icon>
+      </v-btn>
+      <v-btn icon @click='useEraser'>
+        <v-icon>web_asset</v-icon>
+      </v-btn>
+    </v-btn-toggle>
     <v-btn icon @click='clearCanvas'>
       <v-icon>clear</v-icon>
     </v-btn>
@@ -31,9 +30,12 @@ export default {
     usePencil () {
       this.ctx.globalCompositeOperation = 'source-over'
       this.ctx.strokeStyle = 'black'
-      this.ctx.lineWidth = 10
+      this.ctx.lineWidth = 1
     },
     useBrush () {
+      this.ctx.globalCompositeOperation = 'source-over'
+      this.ctx.strokeStyle = 'black'
+      this.ctx.lineWidth = 10
     },
     useEraser () {
       this.ctx.globalCompositeOperation = 'destination-out'
@@ -42,6 +44,7 @@ export default {
     },
     clearCanvas () {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.socket.emit('clearCanvas')
     }
   }
 }
