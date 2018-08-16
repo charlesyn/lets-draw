@@ -7,6 +7,24 @@
       @keyup.enter='joinServer'
       >
     </v-text-field>
+    <v-dialog
+      v-model="dialog"
+      hide-overlay
+      persistent
+      width="300">
+      <v-card
+        color="primary"
+        dark>
+        <v-card-text>
+          Joining Room...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0">
+          </v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-flex>
 </template>
 
@@ -18,11 +36,21 @@ export default {
   },
   data () {
     return {
-      room: ''
+      room: '',
+      dialog: false
+    }
+  },
+  watch: {
+    dialog (val) {
+      if (!val) {
+        return
+      }
+      setTimeout(() => (this.dialog = false), 2000)
     }
   },
   methods: {
     joinServer () {
+      this.dialog = true
       this.socket.emit('room', { room: this.room, username: this.username })
     }
   }
