@@ -1,6 +1,6 @@
 # draw
 
-> A collaborative drawing application
+> A collaborative drawing application. Users can select a server room to draw with others in the same room. Run with lets-draw-server.
 
 ## Build Setup
 

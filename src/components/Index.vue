@@ -10,8 +10,8 @@
 
 <script>
 import io from 'socket.io-client'
-import CanvasVue from './Canvas'
-import RoomSidebar from './RoomSidebar'
+import CanvasVue from './Drawing/Canvas'
+import RoomSidebar from './Sidebar/RoomSidebar'
 import SetUser from './SetUser'
 
 export default {
